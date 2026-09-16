@@ -1,100 +1,108 @@
-#  Exp : 9 (Record-IMPLEMENTATION-OF-EROSION-AND-DILATION)
+# EX-09 - Implementation of Erosion and Dilation Using OpenCV
 
-# Name : Jeevan Vishal.G.D
+## Developed By
 
-# Reg.No : 212224240062
+**Name:** Jeevan Vishal.G.D
 
-
-# Aim
-To perform morphological image processing on an image containing text using erosion and dilation operations with a 3*3 kernel in OpenCV.
+**Register No:** 212224240062
 
 
+## Aim
 
-# Algorithms :
+To write a Python program using OpenCV to perform morphological operations such as Erosion and Dilation on an image.
 
-## Step - 1
-Create a blank image: Initialize a 500*500 black image and add the text “Tamizhselvan B” using cv2.putText().
+The program performs the following operations:
 
-## Step - 2
+- Image Erosion
+- Image Dilation
 
-Define the kernel: Create a 3*3 square structuring element using np.ones().
+## Software Used
 
-## Step - 3
-Apply erosion: Use cv2.erode() with the kernel to shrink the text and reduce the thickness of its characters.
+- Anaconda – Python 3.7
+- Jupyter Notebook / VS Code
+- OpenCV (cv2)
+- NumPy
+- Matplotlib
 
-## Step - 4
+## Algorithm
 
-Apply dilation: Use cv2.dilate() with the same kernel to expand the text and increase the thickness of its characters.
+### Step 1:
 
-## Step - 5
-Display the results: Convert the images from BGR to RGB and display the original, eroded, and dilated images using Matplotlib.
+Import the required libraries: OpenCV, NumPy, and Matplotlib.
+
+### Step 2:
+
+Create a blank image using NumPy.
+
+### Step 3:
+
+Insert text onto the image using OpenCV's text drawing function.
+
+### Step 4:
+
+Display the original image.
+
+### Step 5:
+
+Create a structuring element (kernel) of suitable size.
+
+### Step 6: Image Erosion
+
+- Apply the erosion operation using the created kernel.
+- Remove pixels from the boundaries of foreground objects.
+- Display the eroded image.
+
+### Step 7: Image Dilation
+
+- Apply the dilation operation using the same kernel.
+- Add pixels to the boundaries of foreground objects.
+- Display the dilated image.
+
+### Step 8:
+
+Compare the original, eroded, and dilated images.
+
+## Program
 
 
-# Program :
+## Output
 
-```py
-
-
+### Original Image
+```
 import cv2
-import numpy as np
 import matplotlib.pyplot as plt
+img = cv2.imread("bird.jpeg")
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("Original Image")
+plt.axis("off")
+plt.show()
+```
+<img width="269" height="501" alt="image" src="https://github.com/user-attachments/assets/d919bf10-4b3c-4aa3-8524-995a45235822" />
 
-# Create a blank image
-image = np.zeros((500, 500, 3), dtype=np.uint8)
-
-# Add text on the image using cv2.putText
-font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, 'Tamizhselvan B', (100, 250), font, 1, (215, 165, 255), 2, cv2.LINE_AA)
-
-# Display the input image
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # Convert BGR to RGB for displaying
-plt.title("Input Image with Text")
-plt.axis('off')
-
-# Create a simple square kernel (3x3)
-kernel = np.ones((3, 3), np.uint8)
-
-# Apply erosion (shrinking effect)
-eroded_image = cv2.erode(image, kernel, iterations=1)
-
-# Display the eroded image
-plt.imshow(cv2.cvtColor(eroded_image, cv2.COLOR_BGR2RGB))  # Convert BGR to RGB
-plt.title("Eroded Image")
-plt.axis('off')
-
-# Apply dilation (expanding effect)
-dilated_image = cv2.dilate(image, kernel, iterations=1)
-
-# Display the dilated image
-plt.imshow(cv2.cvtColor(dilated_image, cv2.COLOR_BGR2RGB))  # Convert BGR to RGB
-plt.title("Dilated Image")
-plt.axis('off')
-
-
-
+### Erosion
+```
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+erosion = cv2.erode(img, kernel, iterations=1)
+plt.imshow(erosion, cmap="gray")
+plt.title("Image Erosion")
+plt.axis("off")
+plt.show()
 ```
 
+<img width="264" height="497" alt="image" src="https://github.com/user-attachments/assets/e6890b4d-afa0-4c11-a6ae-107740d3e416" />
 
-# Output :
+### Dilation
+```
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+dilation = cv2.dilate(img, kernel, iterations=1)
+plt.imshow(dilation, cmap="gray")
+plt.title("Image Dilation")
+plt.axis("off")
+plt.show()
+```
 
+<img width="259" height="502" alt="image" src="https://github.com/user-attachments/assets/ab00306f-4b79-4232-b1b6-7ffc7daa6b15" />
 
-## Input Image with Text :
+## Result
 
-
-<img width="412" height="403" alt="image" src="https://github.com/user-attachments/assets/fe8d7c01-30f0-4daf-b1a5-9482d7fcb2fd" />
-
-
-## Eroded Image :
-
-
-<img width="392" height="393" alt="image" src="https://github.com/user-attachments/assets/e5e990fa-c7de-4132-bf3c-aaf56edad65e" />
-
-
-
-## Dilated Image :
-
-<img width="395" height="397" alt="image" src="https://github.com/user-attachments/assets/2766972e-dd30-4b56-979e-2125d23b04cc" />
-
-
-# Result :
-The morphological operations were successfully performed on the text image. Erosion shrunk/thinned the text, while dilation expanded/thickened the text. Thus, the effects of erosion and dilation using a 3*3 kernel were successfully observed.
+Thus, the morphological operations **Erosion** and **Dilation** are successfully implemented using OpenCV.
